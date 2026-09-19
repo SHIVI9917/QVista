@@ -1,0 +1,95 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qvista"
+version = "0.1.0"
+description = "Integrated desktop workbench for VASP workflows and materials analysis."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+authors = [
+    { name = "CMCLAB-IITG" },
+]
+keywords = [
+    "materials science",
+    "DFT",
+    "VASP",
+    "phonons",
+    "crystallography",
+    "machine-learning interatomic potentials",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: X11 Applications :: Qt",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Visualization",
+]
+
+# What the application needs to launch and run every workflow except the
+# machine-learning force field. Lower bounds, not pins -- exact pins belong
+# to a lockfile, not to a library's own dependency declaration, and pinning
+# here would force every user onto one frozen snapshot of the scientific
+# Python stack.
+dependencies = [
+    "PySide6>=6.7",
+    "ase>=3.23",
+    "matplotlib>=3.8",
+    "numpy>=1.26",
+    "phonopy>=2.21",
+    "pymatgen>=2024.5",
+    "pyvista>=0.44",
+    "pyvistaqt>=0.11",
+    "scipy>=1.11",
+    "seekpath>=2.1",
+    "vtk>=9.3",
+]
+
+[project.optional-dependencies]
+# The machine-learning force field. Needed only by the phonon workflows
+# (Stability Tools) and Mechanical Properties -- everything else works
+# without it. Deliberately not a runtime dependency: all three backends
+# pull in torch, a multi-gigabyte download, and QVista detects at runtime
+# whether one is installed rather than requiring it. Install with:
+#   pip install "qvista[ml]"
+ml = [
+    "chgnet>=0.3",
+]
+mace = [
+    "mace-torch>=0.3",
+]
+mattersim = [
+    "mattersim>=1.0",
+]
+dev = [
+    "pytest>=8.0",
+    "black>=24.0",
+    "ruff>=0.6",
+]
+
+[project.urls]
+Homepage = "https://github.com/CMCLAB-IITG/QVista"
+Repository = "https://github.com/CMCLAB-IITG/QVista"
+Issues = "https://github.com/CMCLAB-IITG/QVista/issues"
+Changelog = "https://github.com/CMCLAB-IITG/QVista/blob/main/CHANGELOG.md"
+
+[project.scripts]
+qvista = "qvista.main:main"
+
+[tool.setuptools.packages.find]
+include = ["qvista*"]
+
+[tool.setuptools.package-data]
+qvista = ["gui/icons/*.svg"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

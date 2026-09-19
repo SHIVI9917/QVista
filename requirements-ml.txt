@@ -1,0 +1,35 @@
+# Optional machine-learning force field.
+#
+# Needed only by the phonon workflows (Stability Tools) and Mechanical
+# Properties. Everything else in QVista works without one.
+#
+# Install ONE of the options below. QVista detects whichever is present and
+# names it in the console output and on exported figures, so a result is
+# never attributed to the wrong model.
+#
+# ------------------------------------------------------------------
+# CHGNet -- recommended default.
+#   Ships prebuilt wheels, so it installs anywhere. Trained on Materials
+#   Project relaxation trajectories, which covers inorganic crystals.
+# ------------------------------------------------------------------
+chgnet
+
+# ------------------------------------------------------------------
+# Alternatives (comment out chgnet above if you use one of these)
+#
+# MACE-MP -- also ships wheels:
+#   pip install mace-torch
+#
+# MatterSim -- what the workflows were first written against:
+#   pip install mattersim
+#   NOTE: MatterSim publishes NO wheels, so pip builds it from source.
+#   On Windows that additionally requires the Microsoft C++ Build Tools:
+#     https://visualstudio.microsoft.com/visual-cpp-build-tools/
+#   Without them the build fails, which is why it is not the default here.
+# ------------------------------------------------------------------
+#
+# All of these depend on torch, a multi-gigabyte download.
+#
+# When packaging with Nuitka, exclude the force field unless the binary is
+# meant to ship it:
+#   --nofollow-import-to=chgnet,mace,mattersim,torch

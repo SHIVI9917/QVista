@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=QVista
+GenericName=Computational Materials Workbench
+Comment=Structures, electronic structure, phonons and dynamics for VASP
+Exec=qvista %f
+Icon=qvista
+Terminal=false
+Categories=Science;Physics;Chemistry;Education;
+Keywords=VASP;DFT;POSCAR;phonon;NEB;materials;crystallography;
+MimeType=chemical/x-vasp;chemical/x-cif;chemical/x-xyz;
+StartupNotify=true
+StartupWMClass=qvista

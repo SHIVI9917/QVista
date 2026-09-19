@@ -1,0 +1,90 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+# Matches .venv, .venv-win, .venv-linux and similar; these are multi-GB
+# once torch is installed and must never be committed.
+.venv*/
+venv/
+
+# Secrets
+.env
+*.key
+secrets.*
+
+# VASP pseudopotentials.
+# POTCAR files are licensed by the VASP developers and may not be
+# redistributed. QVista never ships them: the POTCAR library is the user's
+# own installation, pointed at from the POTCAR dialog. Nothing named POTCAR
+# belongs in this repository, at any depth.
+POTCAR
+POTCAR.*
+*_POTCAR
+
+# Scratch project directories and loose structure files used for testing.
+# A leading underscore is the convention for throwaway files written into the
+# project root: _demo_BeAr.vasp is a POTCAR ordering check, not chemistry, and
+# is regenerated whenever it is wanted.
+#
+# The pattern is /_*.vasp and not /*.vasp for a reason. The broader form also
+# excluded LiMnO2-1819592.vasp, the demo structure the README tells every new
+# user to open to confirm their install -- so a fresh clone had no .vasp file
+# at its root and failed the repository's own verification step.
+_tmp_project*/
+_open_poscar.py
+/KPOINTS
+/_*.vasp
+
+# Probe screenshots. The GUI probes write these to the project root; they are
+# throwaway evidence for a single change, not documentation.
+/_*.png
+
+# Test tooling
+.pytest_cache/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Scratch files that accumulate while developing
+/test.py
+qvista/test.out
+qvista_stdout.log
+qvista_stderr.log
+
+# Build output. The Linux bundle is ~2 GB unpacked; the AppImage that
+# comes out of it is ~500 MB. Releases carry the binary, not the repo.
+/build/
+/dist/
+*.AppImage
+packaging/_probe.py
+
+# Screenshots taken while developing. They live beside the code but are
+# not part of it; documentation images belong under docs/.
+/incar_*.png
+/_ui_*.png
+/_eneg_*.png
+/_zoom_*.png
+/_demo_*.png
+
+# One-off maintenance script, not part of the application.
+/consolidate-history.sh
+
+# The tutorial's screenshots keep the same underscore convention: the capture
+# tools under docs/tutorial/tools write throwaway frames beside the real ones
+# while a page is being redone, and those are not documentation either.
+docs/tutorial/images/_*.png
